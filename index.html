@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tema 4 | Flipped Learning y herramientas con propósito</title>
+
+  <style>
+    :root{
+      --pink:#FF0050;
+      --pink-dark:#E30048;
+      --dark:#231F20;
+      --dark2:#30292B;
+      --wine:#5A1830;
+      --soft:#FFF1F5;
+      --soft2:#FFF8FA;
+      --white:#FFFFFF;
+      --text:#2D292A;
+      --muted:#635D5F;
+      --border:#F0E4E8;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      padding:0;
+      background:#FFFFFF;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+    }
+
+    #sise-rise-tema4{
+      width:100%;
+      margin:0;
+      padding:18px 20px;
+    }
+
+    .rise-card{
+      position:relative;
+      overflow:hidden;
+      padding:34px;
+      border-radius:22px;
+      color:#FFFFFF;
+      background:
+        radial-gradient(circle at 92% 8%,rgba(255,0,80,.18),transparent 34%),
+        radial-gradient(circle at 8% 100%,rgba(90,24,48,.28),transparent 34%),
+        linear-gradient(135deg,#231F20 0%,#30292B 58%,#6A1738 120%);
+      box-shadow:0 16px 36px rgba(35,31,32,.12);
+    }
+
+    .rise-card:before{
+      content:"";
+      position:absolute;
+      width:300px;
+      height:300px;
+      right:-110px;
+      top:-140px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:50%;
+    }
+
+    .rise-card:after{
+      content:"";
+      position:absolute;
+      width:150px;
+      height:150px;
+      right:66px;
+      top:-75px;
+      border:1px solid rgba(255,0,80,.22);
+      border-radius:50%;
+    }
+
+    .rise-header,.rise-inner{
+      position:relative;
+      z-index:2;
+    }
+
+    .rise-header{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+    }
+
+    .rise-icon{
+      width:52px;
+      height:52px;
+      min-width:52px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .rise-icon svg{
+      width:27px;
+      height:27px;
+      stroke:var(--pink);
+      fill:none;
+      stroke-width:1.9;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .rise-copy{min-width:0}
+
+    .rise-kicker{
+      margin-bottom:7px;
+      color:#FF9AB8;
+      font-size:12px;
+      line-height:1.2;
+      font-weight:900;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+    }
+
+    .rise-title{
+      margin:0;
+      max-width:1080px;
+      color:#FFFFFF;
+      font-size:clamp(30px,4vw,40px);
+      line-height:1.12;
+      font-weight:900;
+      letter-spacing:-.6px;
+    }
+
+    .rise-description{
+      max-width:980px;
+      margin:13px 0 0;
+      color:#F4EEF0;
+      font-size:16px;
+      line-height:1.6;
+      font-weight:400;
+    }
+
+    .rise-inner{
+      margin-top:24px;
+      padding:24px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      background:#FFFFFF;
+      color:var(--text);
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+
+    .rise-inner-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .rise-inner-copy{
+      min-width:0;
+      max-width:880px;
+    }
+
+    .rise-inner-label{
+      display:inline-block;
+      margin-bottom:8px;
+      padding:6px 9px;
+      border-radius:999px;
+      color:var(--pink);
+      background:var(--soft);
+      font-size:11px;
+      line-height:1;
+      font-weight:900;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+    }
+
+    .rise-inner h2{
+      margin:0 0 9px;
+      color:var(--dark);
+      font-size:22px;
+      line-height:1.25;
+      font-weight:900;
+    }
+
+    .rise-inner p{
+      margin:0;
+      color:#514A4C;
+      font-size:15px;
+      line-height:1.65;
+    }
+
+    .rise-note{
+      margin-top:16px;
+      padding:12px 14px;
+      border-left:5px solid var(--pink);
+      border-radius:9px;
+      color:#5B3E48;
+      background:var(--soft2);
+      font-size:13px;
+      line-height:1.5;
+      font-weight:700;
+    }
+
+    .rise-btn{
+      flex:0 0 auto;
+      min-width:180px;
+      min-height:46px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      padding:0 18px;
+      border-radius:9px;
+      background:var(--pink);
+      color:#FFFFFF;
+      text-decoration:none;
+      font-size:15px;
+      line-height:1;
+      font-weight:900;
+      box-shadow:0 8px 18px rgba(255,0,80,.18);
+      transition:transform .2s ease, background .2s ease;
+    }
+
+    .rise-btn:hover{
+      background:var(--pink-dark);
+      transform:translateY(-1px);
+    }
+
+    .rise-btn svg{
+      width:18px;
+      height:18px;
+      stroke:#FFFFFF;
+      fill:none;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    @media(max-width:760px){
+      #sise-rise-tema4{padding:10px}
+      .rise-card{padding:24px 20px;border-radius:18px}
+      .rise-header{gap:12px}
+      .rise-icon{width:46px;height:46px;min-width:46px}
+      .rise-title{font-size:29px}
+      .rise-description{font-size:15px}
+      .rise-inner{padding:20px}
+      .rise-inner-top{flex-direction:column}
+      .rise-inner h2{font-size:20px}
+      .rise-inner p{font-size:14px}
+      .rise-btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="sise-rise-tema4">
+
+  <section class="rise-card">
+
+    <div class="rise-header">
+
+      <div class="rise-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="2"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+          <circle cx="19" cy="12" r="2"></circle>
+          <path d="M7 12h3"></path>
+          <path d="M14 12h3"></path>
+        </svg>
+      </div>
+
+      <div class="rise-copy">
+        <div class="rise-kicker">Módulo 2 · Tema 4</div>
+
+        <h1 class="rise-title">
+          Flipped Learning y herramientas con propósito: Del Kahoot aislado a una secuencia activa
+        </h1>
+
+        <p class="rise-description">
+          Profundiza en cómo diseñar una secuencia Flipped Learning en la que la preparación autónoma, la activación, la práctica, el feedback y la transferencia se conectan con un propósito pedagógico. Revisarás cómo utilizar microcontenidos, preguntas situacionales, evidencia y evaluación formativa, seleccionando herramientas digitales por la función que cumplen dentro de la experiencia.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="rise-inner">
+
+      <div class="rise-inner-top">
+
+        <div class="rise-inner-copy">
+          <span class="rise-inner-label">Recurso interactivo</span>
+
+          <h2>Profundiza el tema en Rise</h2>
+
+          <p>
+            Accede al recurso interactivo para comprender los principios de Flipped Learning y cómo organizar una secuencia antes–durante que prepare al estudiante para actuar. Avanza sección por sección para revisar microcontenido previo, preparación autónoma, activación y recuperación, práctica, feedback, transferencia, evidencia y evaluación formativa. También analizarás cómo seleccionar herramientas como Kahoot, formularios u otros recursos según su función pedagógica y cómo mantener la alineación entre resultado, pregunta, evidencia, feedback y acción posterior.
+          </p>
+
+          <div class="rise-note">
+            El recurso se abrirá en una nueva pestaña para mantener una visualización amplia y cómoda.
+          </div>
+        </div>
+
+        <a
+          class="rise-btn"
+          href="https://share.articulate.com/5xqvL9_0zFVUsPfPTx1Y_"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir recurso Rise del Tema 4 en una nueva pestaña">
+          Abrir Rise
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 3h7v7"></path>
+            <path d="M10 14L21 3"></path>
+            <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+          </svg>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+</body>
+</html>
